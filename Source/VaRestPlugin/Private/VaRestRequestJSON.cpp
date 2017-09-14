@@ -226,7 +226,11 @@ void UVaRestRequestJSON::ApplyURL(const FString& Url, UVaRestJsonObject *&Result
 	HttpRequest->SetURL(TrimmedUrl);
 
 	// Prepare latent action
+#if ENGINE_MINOR_VERSION > 16
+	if (UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::ReturnNull))
+#else
 	if (UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject))
+#endif
 	{
 		FLatentActionManager& LatentActionManager = World->GetLatentActionManager();
 		FVaRestLatentAction<UVaRestJsonObject*> *Kont = LatentActionManager.FindExistingAction<FVaRestLatentAction<UVaRestJsonObject*>>(LatentInfo.CallbackTarget, LatentInfo.UUID);
