@@ -497,6 +497,27 @@ void UVaRestJsonObject::SetBoolArrayField(const FString& FieldName, const TArray
 	JsonObj->SetArrayField(FieldName, EntriesArray);
 }
 
+TArray<UVaRestJsonObject*> UVaRestJsonObject::GetAllObjects() const
+{
+	TArray<UVaRestJsonObject*> OutArray;
+	if (!JsonObj.IsValid()) {
+		return OutArray;
+	}
+
+	for (auto MapIt = JsonObj->Values.CreateConstIterator(); MapIt; ++MapIt) {
+		if (MapIt->Value->Type == EJson::Object) {
+			TSharedPtr<FJsonObject> NewObj = MapIt->Value->AsObject();
+
+			UVaRestJsonObject* NewJson = NewObject<UVaRestJsonObject>();
+			NewJson->SetRootObject(NewObj);
+
+			OutArray.Add(NewJson);
+		}
+	}
+
+	return OutArray;
+}
+
 TArray<UVaRestJsonObject*> UVaRestJsonObject::GetObjectArrayField(const FString& FieldName) const
 {
 	if (!JsonObj->HasTypedField<EJson::Array>(FieldName))
