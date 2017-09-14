@@ -157,6 +157,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Response")
 	UVaRestJsonObject* GetResponseObject();
 
+	/** Get the Response Json object */
+	UFUNCTION(BlueprintCallable, Category = "VaRest|Response")
+	UVaRestJsonValue* GetResponseValue();
+
 	/** Set the Response Json object */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Response")
 	void SetResponseObject(UVaRestJsonObject* JsonObject);
@@ -288,6 +292,9 @@ protected:
 	/** Response data stored as JSON */
 	UPROPERTY()
 	UVaRestJsonObject* ResponseJsonObj;
+
+	UPROPERTY()
+	UVaRestJsonValue* ResponseJsonVal;
 
 	/** Verb for making request (GET,POST,etc) */
 	ERequestVerb RequestVerb;

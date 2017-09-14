@@ -115,6 +115,7 @@ void UVaRestRequestJSON::ResetResponseData()
 	{
 		ResponseJsonObj = NewObject<UVaRestJsonObject>();
 	}
+	ResponseJsonVal = NewObject<UVaRestJsonValue>();
 
 	ResponseHeaders.Empty();
 	ResponseCode = -1;
@@ -146,6 +147,12 @@ void UVaRestRequestJSON::SetRequestObject(UVaRestJsonObject* JsonObject)
 UVaRestJsonObject* UVaRestRequestJSON::GetResponseObject()
 {
 	return ResponseJsonObj;
+}
+
+
+UVaRestJsonValue* UVaRestRequestJSON::GetResponseValue()
+{
+	return ResponseJsonVal;
 }
 
 void UVaRestRequestJSON::SetResponseObject(UVaRestJsonObject* JsonObject)
@@ -443,8 +450,15 @@ void UVaRestRequestJSON::OnProcessRequestComplete(FHttpRequestPtr Request, FHttp
 	}
 
 	// Try to deserialize data to JSON
+	//TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(ResponseContent);
+	//FJsonSerializer::Deserialize(JsonReader, ResponseJsonObj->GetRootObject());
+
 	TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(ResponseContent);
-	FJsonSerializer::Deserialize(JsonReader, ResponseJsonObj->GetRootObject());
+	FJsonSerializer::Deserialize(JsonReader, ResponseJsonVal->GetRootValue());
+
+	if (ResponseJsonVal->GetType() == EVaJson::Object) {
+		ResponseJsonObj->SetRootObject(ResponseJsonVal->AsObject()->GetRootObject());
+	}
 
 	// Decide whether the request was successful
 	bIsValidJsonResponse = bWasSuccessful && ResponseJsonObj->GetRootObject().IsValid();
