@@ -217,6 +217,7 @@ void UVaRestRequestJSON::ProcessURL(const FString& Url)
 
 void UVaRestRequestJSON::ApplyURL(const FString& Url, UVaRestJsonObject *&Result, UObject* WorldContextObject, FLatentActionInfo LatentInfo)
 {
+	if (WorldContextObject == nullptr) return;
 	// Be sure to trim URL because it can break links on iOS
 	FString TrimmedUrl = Url;
 	TrimmedUrl.Trim();
