@@ -165,8 +165,9 @@ float UVaRestJsonObject::GetNumberField(const FString& FieldName) const
 	return JsonObj->GetNumberField(FieldName);
 }
 
-void UVaRestJsonObject::SetNumberField(const FString& FieldName, float Number)
+void UVaRestJsonObject::SetNumberField(const FString& FieldName, float Number, UVaRestJsonObject* &a_out)
 {
+	a_out = this;
 	if (!JsonObj.IsValid() || FieldName.IsEmpty())
 	{
 		return;
@@ -186,8 +187,9 @@ int32 UVaRestJsonObject::GetIntegerField(const FString& FieldName) const
 	return JsonObj->GetIntegerField(FieldName);
 }
 
-void UVaRestJsonObject::SetIntegerField(const FString& FieldName, int32 Number)
+void UVaRestJsonObject::SetIntegerField(const FString& FieldName, int32 Number, UVaRestJsonObject* &a_out)
 {
+	a_out = this;
 	if (!JsonObj.IsValid() || FieldName.IsEmpty())
 	{
 		return;
@@ -207,8 +209,9 @@ FString UVaRestJsonObject::GetStringField(const FString& FieldName) const
 	return JsonObj->GetStringField(FieldName);
 }
 
-void UVaRestJsonObject::SetStringField(const FString& FieldName, const FString& StringValue)
+void UVaRestJsonObject::SetStringField(const FString& FieldName, const FString& StringValue, UVaRestJsonObject* &a_out)
 {
+	a_out = this;
 	if (!JsonObj.IsValid() || FieldName.IsEmpty())
 	{
 		return;
@@ -228,8 +231,9 @@ bool UVaRestJsonObject::GetBoolField(const FString& FieldName) const
 	return JsonObj->GetBoolField(FieldName);
 }
 
-void UVaRestJsonObject::SetBoolField(const FString& FieldName, bool InValue)
+void UVaRestJsonObject::SetBoolField(const FString& FieldName, bool InValue, UVaRestJsonObject* &a_out)
 {
+	a_out = this;
 	if (!JsonObj.IsValid() || FieldName.IsEmpty())
 	{
 		return;
@@ -345,8 +349,9 @@ UVaRestJsonObject* UVaRestJsonObject::GetObjectField(const FString& FieldName) c
 	return OutRestJsonObj;
 }
 
-void UVaRestJsonObject::SetObjectField(const FString& FieldName, UVaRestJsonObject* JsonObject)
+void UVaRestJsonObject::SetObjectField(const FString& FieldName, UVaRestJsonObject* JsonObject, UVaRestJsonObject* &a_out)
 {
+	a_out = this;
 	if (!JsonObj.IsValid() || FieldName.IsEmpty())
 	{
 		return;

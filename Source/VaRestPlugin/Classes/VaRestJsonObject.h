@@ -93,7 +93,7 @@ class VARESTPLUGIN_API UVaRestJsonObject : public UObject
 	/** Add a field named FieldName with Number as value
 	 * Attn.!! float used instead of double to make the function blueprintable! */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
-	void SetNumberField(const FString& FieldName, float Number);
+	void SetNumberField(const FString& FieldName, float Number, UPARAM(DisplayName = "JSON Object") UVaRestJsonObject* &a_out);
 
 	/** Get the field named FieldName as an Integer. Ensures that the field is present and is of type Json number. */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
@@ -101,7 +101,7 @@ class VARESTPLUGIN_API UVaRestJsonObject : public UObject
 
 	/** Add a field named FieldName with Integer as value. */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
-	void SetIntegerField(const FString& FieldName, int32 Number);
+	void SetIntegerField(const FString& FieldName, int32 Number, UPARAM(DisplayName = "JSON Object") UVaRestJsonObject* &a_out);
 
 	/** Get the field named FieldName as a string. */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
@@ -109,7 +109,7 @@ class VARESTPLUGIN_API UVaRestJsonObject : public UObject
 
 	/** Add a field named FieldName with value of StringValue */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
-	void SetStringField(const FString& FieldName, const FString& StringValue);
+	void SetStringField(const FString& FieldName, const FString& StringValue, UPARAM(DisplayName = "JSON Object") UVaRestJsonObject* &a_out);
 
 	/** Get the field named FieldName as a boolean. */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
@@ -117,7 +117,7 @@ class VARESTPLUGIN_API UVaRestJsonObject : public UObject
 
 	/** Set a boolean field named FieldName and value of InValue */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
-	void SetBoolField(const FString& FieldName, bool InValue);
+	void SetBoolField(const FString& FieldName, bool InValue, UPARAM(DisplayName = "JSON Object") UVaRestJsonObject* &a_out);
 
 	/** Get the field named FieldName as a Json object. */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
@@ -125,7 +125,7 @@ class VARESTPLUGIN_API UVaRestJsonObject : public UObject
 
 	/** Set an ObjectField named FieldName and value of JsonObject */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
-	void SetObjectField(const FString& FieldName, UVaRestJsonObject* JsonObject);
+	void SetObjectField(const FString& FieldName, UVaRestJsonObject* JsonObject, UPARAM(DisplayName = "JSON Object") UVaRestJsonObject* &a_out);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -164,6 +164,7 @@ class VARESTPLUGIN_API UVaRestJsonObject : public UObject
 	/** Set an ObjectField named FieldName and value of Ob Array */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
 	void SetObjectArrayField(const FString& FieldName, const TArray<UVaRestJsonObject*>& ObjectArray);
+
 
 
 	//////////////////////////////////////////////////////////////////////////
