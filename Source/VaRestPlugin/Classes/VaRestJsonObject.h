@@ -157,7 +157,7 @@ class VARESTPLUGIN_API UVaRestJsonObject : public UObject
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
 	void SetBoolArrayField(const FString& FieldName, const TArray<bool>& BoolArray);
 
-	/** Get the all the top level Objects in the current Object */
+	/** Get all the top level Objects in the current Object */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
 	TArray<UVaRestJsonObject*> GetAllObjects() const;
 

@@ -161,8 +161,7 @@ float UVaRestJsonObject::GetNumberField(const FString& FieldName) const
 		UE_LOG(LogVaRest, Warning, TEXT("No field with name %s of type Number"), *FieldName);
 		return 0.0f;
 	}
-
-	return JsonObj->GetNumberField(FieldName);
+	return static_cast<float>(JsonObj->GetNumberField(FieldName));
 }
 
 void UVaRestJsonObject::SetNumberField(const FString& FieldName, float Number, UVaRestJsonObject* &a_out)
@@ -180,7 +179,7 @@ int32 UVaRestJsonObject::GetIntegerField(const FString& FieldName) const
 {
 	if (!JsonObj.IsValid() || !JsonObj->HasTypedField<EJson::Number>(FieldName))
 	{
-		UE_LOG(LogVaRest, Warning, TEXT("No field with name %s of type Number"), *FieldName);
+		UE_LOG(LogVaRest, Warning, TEXT("No field with name %s of type Integer"), *FieldName);
 		return 0;
 	}
 
